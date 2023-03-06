@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  php-go-scylladb:
+    container_name: php-go-scylladb
+    image: php-go-scylladb
+    tty: true
+    build:
+      context: .
+    volumes:
+      - ./:/opt
+    ports:
+      - "127.0.0.1:9501:9501"
+networks:
+  default:
+    name: php-go-scylladb

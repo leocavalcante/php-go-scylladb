@@ -1,0 +1,21 @@
+{
+    "name": "leocavalcante/php-go-scylladb",
+    "description": "Proof of concept on making CQL queries to ScyllaDB from PHP using Spiral's Goridge and Go's shard-aware driver.",
+    "type": "project",
+    "require-dev": {
+        "swoole/ide-helper": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "leocavalcante",
+            "email": "lc@leocavalcante.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "hyperf/nano": "^2.0",
+        "spiral/goridge": "^3.2"
+    }
+}
