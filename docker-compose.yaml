@@ -10,6 +10,9 @@ services:
       - ./:/opt
     ports:
       - "127.0.0.1:9501:9501"
+  scylladb:
+    image: scylladb/scylla
+    container_name: php-go-scylladb-db
 networks:
   default:
     name: php-go-scylladb

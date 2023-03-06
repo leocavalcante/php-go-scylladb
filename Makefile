@@ -10,6 +10,10 @@ up:
 sh:
 	docker compose exec php-go-scylladb sh
 
+.PHONY: cqlsh
+cqsh:
+	docker compose exec scylladb cqlsh
+
 .PHONY: down
 down:
 	docker compose down --remove-orphans

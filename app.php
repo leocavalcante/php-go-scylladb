@@ -28,9 +28,8 @@ $app->getContainer()->define('go', function (): RPC {
 $app->get('/', function (RequestInterface $req, ResponseInterface $res): \Psr\Http\Message\ResponseInterface {
     /** @var RPC $go */
     $go = $this->make('go');
-    $message = $go->call('App.Hi', $req->input('name'));
-
-    return $res->json(['message' => $message]);
+    $todos = $go->call('ScyllaDB.Query', 'SELECT * FROM todos');
+    return $res->json($todos);
 });
 
 $app->run();

@@ -5,31 +5,39 @@
 
 ### The development environment
 
-#### Host
+#### :computer: On your host machine
+| Step | Command       | Description |
+| --- |---------------| --- |
+| 1. | `make image`  | Build the image with PHP and Go |
+| 2. | `make up` | Run services |
+| 3. | `make sh` | Start an interactive shell |
+| 4. | `make cqlsh` | Start an interactive CQL shell inside ScyllaDB |
 
-##### Build the image with PHP and Go
-```shell
-make image
+
+#### :whale: Insde the container
+| Step | Command | Description                                                            |
+| --- | --- |------------------------------------------------------------------------|
+| 1. | `composer install` | Install PHP dependencies                                               |
+| 2. | `go mod tidy` | Install Go dependencies                                                |
+| 3. | `go run -mod=readonly .` | Run Go app (`-mod=readonly` is to avoid `vendor/` directory confusion) |
+| 4. | `php app.php start` | Run PHP app                                                            |
+
+### CQLs (for after `make cqlsh`)
+```cassandraql
+CREATE KEYSPACE php_go_scylladb
+  WITH REPLICATION = { 
+   'class' : 'SimpleStrategy', 
+   'replication_factor' : 1 
+  };
 ```
 
-##### Run the services
-```shell
-make up
+```cassandraql
+CREATE TABLE php_go_scylladb.todos ( 
+   id UUID PRIMARY KEY, 
+   title text);
 ```
 
-##### Start an interactive shell
-```shell
-make sh
-```
-
-#### Container
-
-##### Install PHP dependencies
-```shell
-composer install
-```
-
-##### Install Go dependencies
-```shell
-go mod tidy
+```cassandraql
+INSERT INTO php_go_scylladb.todos (id, title)
+  VALUES (465b5ec8-a580-4a8d-ba3d-69b8a66ed50c, 'PHP 🤝 Go');
 ```
